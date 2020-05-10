@@ -20,7 +20,13 @@
 	</script>
 {% endblock %}
 {% block content %}
-	<ul id="liste">
+	<div class="header">
+		<form method="post">
+			<input type="text" name="new_value" autofocus/>
+			<input type="submit" value="Add" />
+		</form>
+	</div>
+	<ul>
 	{% for item in liste.items %}
 		<li name="{{ item.id }}">
 			<input	onclick="toggle(this);"
@@ -28,15 +34,16 @@
 					{% if item.checked %}
 						checked="checked"
 					{% endif %}
-			/>{{ item.text }}
+	  				id="checkbox-{{ item.id }}"
+			/>
+			<label for="checkbox-{{ item.id }}">
+				{{ item.text }}
+			</label>
 			<a href="#" onclick="remove(this); return false">
-				<img src="static/recycle_bin.png"/>
+				{#<img src="static/recycle_bin.png"/>#}
+				<span class="closed">&#x00D7;</span>
 			</a>
 		</li>
 	{% endfor %}
 	</ul>
-	<form method="post">
-		<input type="text" name="new_value" autofocus/>
-		<input type="submit" value="Add" />
-	</form>
 {% endblock %}
